@@ -8,8 +8,11 @@
 class Block
 {
 private:
+
     char *block;
     int nrOfElements;
+    bool used;
+    std::string args;
 
 public:
     /* Constructor */
@@ -38,6 +41,10 @@ public:
     int writeBlock(const std::vector<char> &vec);
     void writeBlock(const char cArr[]);     // Use with caution! Make sure that cArr is at least as large as private member block.
 
+    bool getUsed() const;
+    void setUsed(bool used);
+
+	char* getBlock() const;
     std::string toString() const;
 };
 

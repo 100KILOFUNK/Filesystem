@@ -1,4 +1,5 @@
 #include "blockdevice.h"
+#include <iostream>
 
 BlockDevice::BlockDevice(int nrOfBlocks) {
     if (nrOfBlocks > 0)
@@ -8,6 +9,10 @@ BlockDevice::BlockDevice(int nrOfBlocks) {
 
     this->memBlocks = new Block[this->nrOfBlocks];
     this->freePointer = 0;
+
+	
+
+
 
 }
 
@@ -22,5 +27,6 @@ BlockDevice::BlockDevice(const BlockDevice &other) {
 
 BlockDevice::~BlockDevice() {
     delete [] this->memBlocks;
+	
 }
 

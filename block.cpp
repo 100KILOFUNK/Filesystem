@@ -1,6 +1,6 @@
 #include "block.h"
 #include <stdexcept>
-
+#include <iostream>
 
 Block::Block(int size) {
     /* Setting size */
@@ -9,10 +9,17 @@ Block::Block(int size) {
     else
         this->nrOfElements = 512;
 
+    //Allocates a new block with the size of NrOfLements
     this->block = new char[this->nrOfElements];
+
+    this->used = false;
 
     // Sets everything to 0
     this->reset();
+
+
+
+
 }
 
 Block::Block(const Block &other) {
@@ -23,6 +30,7 @@ Block::Block(const Block &other) {
 }
 
 Block::~Block() {
+	
     delete [] this->block;
 }
 
@@ -65,7 +73,7 @@ int Block::writeBlock(const std::string &strBlock) {
         }
         output = 1;
     }
-
+	
     return output;
 }
 
@@ -80,21 +88,42 @@ int Block::writeBlock(const std::vector<char> &vec) {
 //    else {
 //        throw std::out_of_range("vector and block not the same dimension");
 //    }
+    
     return output;
 }
 
 void Block::writeBlock(const char cArr[]) {
+	
     for (int i = 0; i < this->nrOfElements; ++i) {
         this->block[i] = cArr[i];
     }
+
+
+}
+
+bool Block::getUsed() const{
+	return this->used;
+}
+
+void Block::setUsed(bool used) {
+	this->used = used;
 }
 
 std::string Block::toString() const {
-    std::string output;
-    output.resize(this->nrOfElements);
-    for (int i = 0; i < this->nrOfElements; ++i)
-        output += this->block[i];
+
+	std::string output;
+	//output.resize(this->nrOfElements); //this just seems to cause trouble
+
+    for (int i = 0; i < this->nrOfElements; ++i){
+    	output += this->block[i];
+    }
+
+	
     return output;
+}
+
+char* Block::getBlock() const {
+	return this->block;
 }
 
 

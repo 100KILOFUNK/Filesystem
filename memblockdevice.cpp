@@ -1,16 +1,19 @@
 #include "memblockdevice.h"
 #include <stdexcept>
+#include <iostream>
 
 MemBlockDevice::MemBlockDevice(int nrOfBlocks): BlockDevice(nrOfBlocks) {
-
+	//skapar ett blockdev obj och 250 block obj
+	
 }
 
 MemBlockDevice::MemBlockDevice(const MemBlockDevice &other) : BlockDevice(other) {
-
+	//copy constructor
 }
 
 MemBlockDevice::~MemBlockDevice() {
     /* Implicit call to base-class destructor */
+	
 }
 
 MemBlockDevice& MemBlockDevice::operator=(const MemBlockDevice &other) {
@@ -35,8 +38,8 @@ Block& MemBlockDevice::operator[](int index) const {
 }
 
 int MemBlockDevice::spaceLeft() const {
-    /* Not yet implemented */
-    return 0;
+    int space = 250 - this->freePointer;
+    return space;
 }
 
 int MemBlockDevice::writeBlock(int blockNr, const std::vector<char> &vec) {
@@ -47,6 +50,8 @@ int MemBlockDevice::writeBlock(int blockNr, const std::vector<char> &vec) {
         /* 1 = success */
         output = this->memBlocks[blockNr].writeBlock(vec);
     }
+
+	
     return output;
 }
 
@@ -87,6 +92,30 @@ void MemBlockDevice::reset() {
     }
 }
 
+void MemBlockDevice::reset(int index) {
+	this->memBlocks[index].reset('0');
+}
+
 int MemBlockDevice::size() const {
     return this->nrOfBlocks;
+}
+
+std::string MemBlockDevice::getContent(int index) const{
+	return memBlocks[index].toString();
+}
+
+bool MemBlockDevice::used(int i) const{
+	return this->memBlocks[i].getUsed();
+}
+
+void MemBlockDevice::setUsed(int i, bool used) {
+	this->memBlocks[i].setUsed(used);
+}
+
+int MemBlockDevice::freePtr() const {
+	return this->freePointer;
+}
+
+void MemBlockDevice::incPtr() {
+	this->freePointer++;
 }

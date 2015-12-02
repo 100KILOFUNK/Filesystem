@@ -4,6 +4,7 @@
 
 class MemBlockDevice: public BlockDevice
 {
+
 public:
     MemBlockDevice(int nrOfBlocks = 250);
     MemBlockDevice(const MemBlockDevice &other);
@@ -28,8 +29,20 @@ public:
     /* Resets all the blocks */
     void reset();
 
+	/* reset just the one block */
+	void reset(int index);
+
     /* Return the size */
     int size() const;
+
+    bool used(int i) const;
+    void setUsed(int i, bool used);
+
+
+    std::string getContent(int index) const;
+
+    int freePtr() const;
+    void incPtr();
 };
 
 #endif // MEMBLOCKDEVICE_H
