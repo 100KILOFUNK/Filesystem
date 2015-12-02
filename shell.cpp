@@ -44,8 +44,6 @@ int main(void) {
     std::string tmp;
     std::vector<string> args;
 
-	while (1) cout << "hej";
-
     bool bRun = true;
 
 
