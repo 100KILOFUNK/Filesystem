@@ -121,7 +121,7 @@ int main(void) {
         currentDir = fs.pwd();
 		
     } while (bRun == true);
-	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
+	
     return 0;
 }
 
@@ -145,12 +145,7 @@ void pathtest(string &path) {
 	for (int i = 0; i < to.size(); i++) {
 		cout << "To: " << i << ": " << to[i] << endl;
 	}
-	/* NOTE to self. 0 is always the file name OR i case of cd, target directory. vector.back() - 1 is alwasy subdir of root (frst file to look for). bector.back() is ., .., or nothing*/
-	/*tmp = getArg(t);
-
-	for (int i = 0; i < tmp.size(); i++) {
-		cout << i << ": " << tmp[i] << endl;
-	}*/
+	
 }
 
 void copy(FileSystem &fs, string &path) {
